@@ -10,10 +10,19 @@ class Customer(models.Model):
     def __str__(self):
         return self.Name
     
-class ProductCategory(models.Models):
+class ProductCategory(models.Model):
     Category=models.CharField(max_length=100)
 
     def __str__(self):
         return self.Category
-    
+class Product(models.Model):
+    P_Name=models.CharField( max_length=50)
+    P_Desc=models.CharField(max_length=100)
+    P_Price=models.IntegerField()
+    Discounted_p_Price=models.IntegerField()
+    P_Image=models.ImageField(upload_to='images/')
+    P_Category=models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.P_Name
 # Create your models here.
