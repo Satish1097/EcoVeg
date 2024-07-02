@@ -25,4 +25,20 @@ class Product(models.Model):
 
     def __str__(self):
         return self.P_Name
+    
+class Cart(models.Model):
+    ProductDetail=models.ForeignKey(Product,on_delete=models.CASCADE)
+    CustomerDetail=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Quantity=models.IntegerField()
+    def __str__(self):
+        return self.CustomerDetail.Name
+
+class Order(models.Model):
+    ProductDetail=models.ForeignKey(Product,on_delete=models.CASCADE)
+    CustomerDetail=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    Quantity=models.IntegerField(default=1)
+    Status=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.CustomerDetail.Name
 # Create your models here.

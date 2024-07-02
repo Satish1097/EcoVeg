@@ -1,9 +1,10 @@
-from . import views
+from .views import CustomerListCreate, ItemDetail
 from django.urls import path
 
 
 
 
 urlpatterns = [
-    path('',views.Home,name='Home')
+    path('Customer/', CustomerListCreate.as_view(), name='item-list-create'),
+    path('items/<int:pk>/', ItemDetail.as_view(), name='item-detail'),
 ]
