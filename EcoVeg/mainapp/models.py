@@ -19,7 +19,7 @@ class Product(models.Model):
     P_Name=models.CharField( max_length=50)
     P_Desc=models.CharField(max_length=100)
     P_Price=models.IntegerField()
-    Discounted_p_Price=models.IntegerField()
+    Discounted_Price=models.IntegerField()
     P_Image=models.ImageField(upload_to='images/')
     P_Category=models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
 
@@ -36,7 +36,6 @@ class Cart(models.Model):
 class Order(models.Model):
     ProductDetail=models.ForeignKey(Product,on_delete=models.CASCADE)
     CustomerDetail=models.ForeignKey(Customer,on_delete=models.CASCADE)
-    Quantity=models.IntegerField(default=1)
     Status=models.CharField(max_length=20)
 
     def __str__(self):

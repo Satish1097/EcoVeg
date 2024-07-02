@@ -1,4 +1,4 @@
-from .views import CustomerListCreate, ItemDetail
+from .views import CustomerListCreate,ProductList
 from django.urls import path
 
 
@@ -6,5 +6,5 @@ from django.urls import path
 
 urlpatterns = [
     path('Customer/', CustomerListCreate.as_view(), name='item-list-create'),
-    path('items/<int:pk>/', ItemDetail.as_view(), name='item-detail'),
+    path('Product/', ProductList.as_view(), name='item-detail'),
 ]
