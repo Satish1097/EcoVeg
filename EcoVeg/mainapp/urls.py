@@ -1,14 +1,18 @@
-from .views import CustomerListCreate,ProductList,CategoryList,CartDetail,OrderDetail
-from django.urls import path
+from . import views
+from django.urls import path,include
 
+
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'customers',views.CustomerViewSet)
+router.register(r'products',views.ProductViewSet)
+router.register(r'categories',views.CategoryViewSet)
+router.register(r'orders',views.OrderViewSet)
+router.register(r'cart',views.CartViewSet)
 
 
 
 urlpatterns = [
-    path('Customer/', CustomerListCreate.as_view(), name='item-list-create'),
-    path('Product/', ProductList.as_view(), name='item-detail'),
-    path('ProductCategory/',CategoryList.as_view(),name='CategoryList'),
-    path('Cart/',CartDetail.as_view(),name='CartDetail'),
-    path('Order/',OrderDetail.as_view(),name='OrderDetail')
-
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
