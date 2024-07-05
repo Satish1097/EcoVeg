@@ -4,6 +4,20 @@ from .models import Customer,Product,ProductCategory,Cart,Order
 from .serializers import CustomerSerializer,ProductSerializer,CategorySerializer,CartSerializer,OrderSerializer
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def category(request):
+    category = ProductCategory.objects.all()
+    serializer = CategorySerializer(category, many=True)
+    return Response( serializer.data)
+
+@api_view(['GET'])
+def product(request):
+    product=Product.objects.all()
+    serializer=ProductSerializer(product,many=True)
+    return Response(serializer.data)
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset=Customer.objects.all()
@@ -20,7 +34,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset=ProductCategory.objects.all()
     serializer_class=CategorySerializer
-    permission_classes=[permissions.IsAuthenticated]
+    permission_classes=[permissions.IsAuthenticatedOrReadOnly]
 
 
 class CartViewSet(viewsets.ModelViewSet):
